@@ -1,0 +1,968 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Skinbaron API (Unofficial)",
+        "version": "0.1",
+        "description": "**General usage hints**<br/>If you encounter an error of the form **BAD AUTHENTICITY TOKEN** please ensure the following: in order to make a correct request to the SkinBaron API please send the headers **Content-Type: application/json** and **x-requested-with: XMLHttpRequest** with every request! In particular the latter prevents the **BAD AUTHENTICITY TOKEN** error.<br/><br/>Example (curl under unix): `curl -H \"Content-Type: application/json\" -H \"x-requested-with: XMLHttpRequest\" -X POST -d '{ \"apikey\" : \"your api key\" }' https://api.skinbaron.de/GetBalance`<br/><br/>Please notice that the syntax for curl under windows is a little bit different. Please further notice that you have to replace `your api key` with your actual api key that you can generate in your profile on `https://skinbaron.de`.",
+        "termsOfService": "https://skinbaron.de/special/tos",
+        "contact": {
+            "email": "support@skinbaron.de"
+        }
+    },
+    "servers": [
+        {
+            "url": "api.skinbaron.de",
+            "description": "Main API entry point"
+        }
+    ],
+    "tags": [
+        {
+            "name": "account",
+            "description": "Everything related to you SkinBaron account"
+        },
+        {
+            "name": "offers",
+            "description": "Buying and selling on SkinBaron"
+        },
+        {
+            "name": "tradeoffers",
+            "description": "Everything related to steam tradeoffers"
+        }
+    ],
+    "paths": {
+        "/GetBalance": {
+            "post": {
+                "tags": [
+                    "account"
+                ],
+                "summary": "Get your current SkinBaron balance",
+                "description": "",
+                "operationId": "getBalance",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetBalanceRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetBalanceResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/ListItems": {
+            "post": {
+                "tags": [
+                    "offers"
+                ],
+                "summary": "List items for sale on SkinBaron",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ListItemsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ListItemsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/EditPriceMulti": {
+            "post": {
+                "tags": [
+                    "offers"
+                ],
+                "summary": "Edit prices of your offers",
+                "description": "Edit the prices of some of your current offers. The number of offers that can be edited in one call is limited to 100 at the moment. This might change.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/EditPriceMultiRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/ReturnItems": {
+            "post": {
+                "tags": [
+                    "offers"
+                ],
+                "summary": "Cancel offers and return the corresponding items",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReturnItemsRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ReturnItemsResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/GetSales": {
+            "post": {
+                "tags": [
+                    "offers"
+                ],
+                "summary": "Information about your offers",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetSalesRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetSalesResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/Search": {
+            "post": {
+                "tags": [
+                    "offers"
+                ],
+                "summary": "Information about your offers",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/SearchRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/SearchResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/BuyItems": {
+            "post": {
+                "tags": [
+                    "offers"
+                ],
+                "summary": "",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BuyRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BuyResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/GetInventory": {
+            "post": {
+                "tags": [
+                    "offers"
+                ],
+                "summary": "",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetInventoryRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetInventoryResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/GetActiveTradeOffers": {
+            "post": {
+                "tags": [
+                    "tradeoffers"
+                ],
+                "summary": "",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/GetActiveTradeOffersRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/GetActiveTradeOffersResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        },
+        "/ResendFailedTradeOffers": {
+            "post": {
+                "tags": [
+                    "tradeoffers"
+                ],
+                "summary": "",
+                "description": "",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ResendFailedTradeOffersRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "successful operation"
+                    },
+                    "400": {
+                        "description": "Un-authorized or malformed request"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "GetBalanceRequest": {
+                "required": [
+                    "apikey"
+                ],
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "Your SkinBaron api key"
+                    }
+                }
+            },
+            "GetBalanceResponse": {
+                "type": "object",
+                "properties": {
+                    "balance": {
+                        "type": "number",
+                        "description": "The current balance of your account"
+                    }
+                }
+            },
+            "ListItemsRequest": {
+                "type": "object",
+                "required": [
+                    "apikey",
+                    "items"
+                ],
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "Your SkinBaron api key"
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "The items to be listed for sale",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "appid",
+                                "contextid",
+                                "assetid",
+                                "price",
+                                "addons"
+                            ],
+                            "properties": {
+                                "appid": {
+                                    "type": "integer",
+                                    "description": "The Steam AppID of the game to which the item to be listed belongs"
+                                },
+                                "contextid": {
+                                    "type": "string",
+                                    "description": "The Steam ContextID to which the item to be listed belongs"
+                                },
+                                "assetid": {
+                                    "type": "string",
+                                    "description": "The Steam AssetID of the item to be listed in your Steam inventory"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "description": "The price the item should be listed for"
+                                },
+                                "addons": {
+                                    "type": "array",
+                                    "description": "Addon Strings, right now only \"private\" is accepted which means that the offer should be private",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ListItemsResponse": {
+                "type": "object",
+                "properties": {
+                    "offergroup_id": {
+                        "type": "string",
+                        "description": "The SkinBaronID of the tradeoffer we will send you"
+                    },
+                    "tradeoffer_id": {
+                        "type": "string",
+                        "description": "The steam TradeOfferID"
+                    },
+                    "tradeoffer_error": {
+                        "type": "string",
+                        "description": "Additional information if an error occurred"
+                    },
+                    "security_token": {
+                        "type": "string",
+                        "description": "The security token our bot will present to you when initiation the trade"
+                    },
+                    "sales": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "saleid",
+                                "appid",
+                                "contextid",
+                                "assetid",
+                                "market_name",
+                                "price",
+                                "addons"
+                            ],
+                            "properties": {
+                                "saleid": {
+                                    "type": "string",
+                                    "description": "TThe SkinBaronID of this offer"
+                                },
+                                "appid": {
+                                    "type": "integer",
+                                    "description": "The steam AppID"
+                                },
+                                "contextid": {
+                                    "type": "string",
+                                    "description": "The steam ContextID"
+                                },
+                                "assetid": {
+                                    "type": "string",
+                                    "description": "The AssetID of the item after the trade"
+                                },
+                                "market_name": {
+                                    "type": "string",
+                                    "description": "The steam market hash name of the item"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "description": "The price of the item"
+                                },
+                                "addons": {
+                                    "type": "array",
+                                    "description": "Addon Strings, right now only \"private\" is accepted which means that the offer should be private",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "EditPriceMultiRequest": {
+                "type": "object",
+                "required": [
+                    "apikey",
+                    "items"
+                ],
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "Your SkinBaron api key"
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "The new prices for the corresponding offers",
+                        "items": {
+                            "type": "object",
+                            "required": [
+                                "saleid",
+                                "price"
+                            ],
+                            "properties": {
+                                "saleid": {
+                                    "type": "string",
+                                    "description": "The ID of the offer to edit"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "description": "The new item price"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ReturnItemsRequest": {
+                "type": "object",
+                "required": [
+                    "apikey",
+                    "items"
+                ],
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "Your SkinBaron api key"
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "A list of the SaleIDs to cancel",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "ReturnItemsResponse": {
+                "type": "object",
+                "properties": {
+                    "offers": {
+                        "type": "array",
+                        "description": "This will always contain 1 item for now",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "offercancelgroup_id": {
+                                    "type": "string",
+                                    "description": "The SkinBaronID of this steam trade"
+                                },
+                                "bot_id": {
+                                    "type": "string",
+                                    "description": "The id of the bot that will send the offer - unused"
+                                },
+                                "items": {
+                                    "type": "array",
+                                    "description": "The uuids (SaleID) of the items to be sent back with this trade",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "tradeoffer_id": {
+                                    "type": "string",
+                                    "description": "The steam TradeOfferID"
+                                },
+                                "tradeoffer_error": {
+                                    "type": "string",
+                                    "description": "Additional information if an error occurred"
+                                },
+                                "security_token": {
+                                    "type": "string",
+                                    "description": "The security token that will be presented when the trade is sent from our bot"
+                                }
+                            }
+                        }
+                    }
+                },
+                "GetSalesRequest": {
+                    "type": "object",
+                    "required": [
+                        "apikey"
+                    ],
+                    "properties": {
+                        "apikey": {
+                            "type": "string",
+                            "description": "Your SkinBaron api key"
+                        }
+                    }
+                },
+                "GetSalesResponse": {},
+                "SearchRequest": {
+                    "type": "object",
+                    "required": [
+                        "apikey"
+                    ],
+                    "properties": {
+                        "apikey": {
+                            "type": "string",
+                            "description": "Your SkinBaron api key"
+                        }
+                    }
+                },
+                "SearchResponse": {}
+            },
+            "GetSalesRequest": {
+                "type": "object",
+                "required": [
+                    "apikey"
+                ],
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "You SkinBaron api key"
+                    },
+                    "type": {
+                        "type": "integer",
+                        "description": "Filter to determine the type of sales you want to get: 1 - items listed for sale but not yet available in the market. The item might be processing, stuck in a trade escrow or simply waiting for you to accept the trade offer from our bots 2 - Item listed for sale on SkinBaron 3 - Sold but not payed or forwarded to the buyer 4 - Sold, payed and delivered. You got money. 5 - Return of item requested, but not fully processed yet. 6 - Item has been returned. 7 - Item has been canceled to SkinBaron inventory"
+                    },
+                    "appid": {
+                        "type": "integer",
+                        "description": "Returns only items for the given appid. At the moment everything except for 730 (CS:GO) is ignored."
+                    },
+                    "after_saleid": {
+                        "type": "string",
+                        "description": "Only get items with an id lower than the given item, i.e., only older items."
+                    },
+                    "items_per_page": {
+                        "type": "integer",
+                        "description": "Returns only items for the given appid. At the moment everything except for 730 (CS:GO) is ignored."
+                    },
+                    "sort_order": {
+                        "type": "integer",
+                        "description": "Parameter to specify sort order of results.\\n0 - sort by internal order, usually this gives you most recently added offers first. This is the default if the parameter is not specified.\\n1 - sort by \\\"most recently added\\\"\\n2 - sort by \\\"most recently sold\\\""
+                    }
+                }
+            },
+            "GetSalesResponse": {
+                "type": "object",
+                "properties": {
+                    "offers": {
+                        "type": "array",
+                        "description": "A list with all the current sales filtered according to your query",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "The saleid of this sale"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "description": "The current price of this sale"
+                                },
+                                "commission": {
+                                    "type": "number",
+                                    "description": "The amount of commission you payed. Only applicable if this item has already been sold. Null otherwise"
+                                },
+                                "tax": {
+                                    "type": "number",
+                                    "description": "The amount of tax that has been included in the commission. Only applicable if this item has already been sold. Null otherwise"
+                                },
+                                "classid": {
+                                    "type": "string",
+                                    "description": "The steam classid of this sale"
+                                },
+                                "instanceid": {
+                                    "type": "string",
+                                    "description": "The steam instanceid of this sale"
+                                },
+                                "appid": {
+                                    "type": "integer",
+                                    "description": "The steam appid of this sale"
+                                },
+                                "contextid": {
+                                    "type": "string",
+                                    "description": "The steam context id of this sale"
+                                },
+                                "assetid": {
+                                    "type": "string",
+                                    "description": "The current steam asset id of this sale"
+                                },
+                                "name": {
+                                    "type": "string",
+                                    "description": "The steam market hash name of this sale"
+                                },
+                                "offerid": {
+                                    "type": "string",
+                                    "description": "The id of the trade offer in which this sale will be traded. This might be the trade to be listed or the trade to be returned. Null in all other cases."
+                                },
+                                "state": {
+                                    "type": "integer",
+                                    "description": "The state of this sale. The value corresponds to the state filter in the request: 1 - items listed for sold but not yet available in the market. The item might be processing, stuck in a trade escrow or simply waiting for you to accept the trade offer from our bots 2 - Item listed for sale on SkinBaron 3 - Sold but not payed or forwarded to the buyer 4 - Sold, payed and delivered. You got money. 5 - Return of item requested, but not fully processed yet. 6 - Item has been returned."
+                                },
+                                "escrow_end_date": {
+                                    "type": "integer",
+                                    "description": "A unix timestamp defining the end of the ESCROW period if the item is hold in ESCROW. Unused."
+                                },
+                                "list_time": {
+                                    "type": "integer",
+                                    "description": "The time when this sale has been listed. Unix timestamp."
+                                },
+                                "last_updated": {
+                                    "type": "integer",
+                                    "description": "The time when this sale has been last updated. Unix timestamp."
+                                },
+                                "security_token": {
+                                    "type": "string",
+                                    "description": "The security token the bot will send along with a tradeoffer for this item. This is only applicable if this sale is waiting to be listed or waiting to be returned."
+                                },
+                                "wear": {
+                                    "type": "number",
+                                    "description": "Item wear, if applicable"
+                                },
+                                "txid": {
+                                    "type": "string",
+                                    "description": "If this sale is sold, this is the id of the transfer you received your money in. You can find this in your profile as transaction."
+                                },
+                                "trade_locked": {
+                                    "type": "boolean",
+                                    "description": "Item locked status"
+                                },
+                                "addons": {
+                                    "type": "array",
+                                    "description": "Addon Strings, right now only \"private\" is accepted which means that the offer should be private",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "SearchRequest": {
+                "type": "object",
+                "required": [
+                    "apikey",
+                    "appid"
+                ],
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "You SkinBaron api key"
+                    },
+                    "appid": {
+                        "type": "integer",
+                        "description": "The id of the app to search items for"
+                    },
+                    "search_item": {
+                        "type": "string",
+                        "description": "A string to search for"
+                    },
+                    "min": {
+                        "type": "number",
+                        "description": "The minimum price to search for"
+                    },
+                    "max": {
+                        "type": "number",
+                        "description": "The maximum price to search for"
+                    },
+                    "after_saleid": {
+                        "type": "string",
+                        "description": "Only get items with an id lower than the given item, i.e., only older items."
+                    },
+                    "items_per_page": {
+                        "type": "integer",
+                        "description": "The number of items you would like to retrieve"
+                    }
+                }
+            },
+            "SearchResponse": {
+                "type": "object",
+                "properties": {
+                    "sales": {
+                        "type": "array",
+                        "description": "The results of the search, i.e., the current page.",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "id": {
+                                    "type": "string",
+                                    "description": "The SkinBaron saleid. The item can be inspected and bought using this id."
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "description": "The price of this sale"
+                                },
+                                "img": {
+                                    "type": "string",
+                                    "description": "The items steam image url"
+                                },
+                                "market_name": {
+                                    "type": "string",
+                                    "description": "The items steam market hash name"
+                                },
+                                "sbinspect": {
+                                    "type": "string",
+                                    "description": "The SkinBaron inspect link for this sale"
+                                },
+                                "inspect": {
+                                    "type": "string",
+                                    "description": "The steam inspect link for this sale, if applicable"
+                                },
+                                "stickers": {
+                                    "type": "string",
+                                    "description": "The stickers on this item, if applicable"
+                                },
+                                "wear": {
+                                    "type": "number",
+                                    "description": "Item wear, if applicable"
+                                },
+                                "appid": {
+                                    "type": "integer",
+                                    "description": "The item's steam appid"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "BuyRequest": {
+                "type": "object",
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "You SkinBaron api key"
+                    },
+                    "total": {
+                        "type": "number",
+                        "description": "The total of the prices of the sales you would like to purchase. This has to match the accumulated prices of the items above."
+                    },
+                    "saleids": {
+                        "type": "array",
+                        "description": "A list of the SkinBaron SaleIDs you would like to purchase",
+                        "items": {
+                            "type": "string"
+                        }
+                    }
+                }
+            },
+            "BuyResponse": {
+                "type": "object",
+                "properties": {
+                    "security_token": {
+                        "type": "string",
+                        "description": "The security key the bot will tell you when sending you the trade offer"
+                    },
+                    "total": {
+                        "type": "number",
+                        "description": "The total price of the items purchased"
+                    },
+                    "items": {
+                        "type": "array",
+                        "description": "The items you purchased",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "name": {
+                                    "type": "string",
+                                    "description": "The MarketHashName of the purchased item"
+                                },
+                                "saleid": {
+                                    "type": "string",
+                                    "description": "The SkinBaronID of the purchased item - this matches one of the SaleIDs in the request"
+                                },
+                                "price": {
+                                    "type": "number",
+                                    "description": "The price of the item"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "GetInventoryRequest": {
+                "type": "object",
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "Your SkinBaron api key"
+                    },
+                    "appid": {
+                        "type": "integer",
+                        "description": "The id of the app to search items for. Default: 730 for CS:GO"
+                    }
+                }
+            },
+            "GetInventoryResponse": {
+                "type": "object",
+                "description": "Not yet available"
+            },
+            "GetActiveTradeOffersRequest": {
+                "type": "object",
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "Your SkinBaron api key"
+                    }
+                }
+            },
+            "GetActiveTradeOffersResponse": {
+                "type": "object",
+                "properties": {
+                    "offers": {
+                        "type": "object",
+                        "description": "A mapping from skinbaron tradeid to active trade offer objects",
+                        "properties": {
+                            "SB_TRADEID": {
+                                "type": "object",
+                                "properties": {
+                                    "tradeid": {
+                                        "type": "string",
+                                        "description": "the Steam TradeOfferID"
+                                    },
+                                    "security_token": {
+                                        "type": "string",
+                                        "description": "the security key the bot should have shown you"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "description": "Indicates the type of this ActiveTradeOffer. Valid types are: OFFER - for items you are going to sell, PURCHASE - for items you recently bought, and CANCEL for offers you cancelled"
+                                    },
+                                    "tradeofferlink": {
+                                        "type": "string",
+                                        "description": "The tradeoffer link we used to send the items to you"
+                                    },
+                                    "state": {
+                                        "type": "string",
+                                        "description": "The current state of this tradeoffer"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "ResendFailedTradeOffersRequest": {
+                "type": "object",
+                "properties": {
+                    "apikey": {
+                        "type": "string",
+                        "description": "Your SkinBaron api key"
+                    }
+                }
+            }
+        }
+    }
+}
