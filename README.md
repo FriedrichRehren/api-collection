@@ -24,7 +24,7 @@
 
 <br />
 
-<p align="center">All APIs should be documented using <a href="https://github.com/OAI/OpenAPI-Specification">The OpenAPI Specification</a> using preferably its most recent version.</p>
+<p align="center">All APIs should be documented using <a taget="_blank" href="https://github.com/OAI/OpenAPI-Specification">The OpenAPI Specification</a> using preferably its most recent version.</p>
 
 <br />
 <br />
@@ -43,25 +43,40 @@ Made with [contributors-img](https://contrib.rocks).
 
 ## Currently Documented APIs
 
-| Provider | Documentation | OpenAPI Version |
-| :------- | :-----------: | --------------: |
-| [SkinBaron][skinbaron_link] | [![json]][skinbaron_file] | ![openapi_3.0.2] |
-<!-- | [MeinVerein][meinverein_link] | [![json]][meinverein_file] | ![openapi_3.0.3] | -->
+| Provider | Documentation | OpenAPI Version | API Library | Reference Docs |
+| :------- | :-----------: | --------------: | :---------- | -------------: |
+| SkinBaron | [![json]][skinbaron_file] | [![openapi_3.0.2_badge]][openapi_3.0.2_link] | <!--[![c#]][skinbaron_lib]--> | [SkinBaron API][skinbaron_link] |
+<!--| MeinVerein | [![json]][meinverein_file] | [![openapi_3.0.3_badge]][openapi_3.0.3_link] | [![c#]][meinverein_lib] | | -->
 
 
 <!-- OpenAPI Specification Badges -->
-[openapi_2.0]:https://img.shields.io/badge/OpenAPI-2.0-00ff00
-[openapi_3.0.0]:https://img.shields.io/badge/OpenAPI-3.0.0-00ff00
-[openapi_3.0.1]:https://img.shields.io/badge/OpenAPI-3.0.1-00ff00
-[openapi_3.0.2]:https://img.shields.io/badge/OpenAPI-3.0.2-00ff00
-[openapi_3.0.3]:https://img.shields.io/badge/OpenAPI-3.0.3-00ff00
-[openapi_3.1.0]:https://img.shields.io/badge/OpenAPI-3.1.0-00ff00
+[openapi_2.0_badge]:https://img.shields.io/badge/OpenAPI-2.0-00ff00
+[openapi_3.0.0_badge]:https://img.shields.io/badge/OpenAPI-3.0.0-00ff00
+[openapi_3.0.1_badge]:https://img.shields.io/badge/OpenAPI-3.0.1-00ff00
+[openapi_3.0.2_badge]:https://img.shields.io/badge/OpenAPI-3.0.2-00ff00
+[openapi_3.0.3_badge]:https://img.shields.io/badge/OpenAPI-3.0.3-00ff00
+[openapi_3.1.0_badge]:https://img.shields.io/badge/OpenAPI-3.1.0-00ff00
+
 <!-- File Badges -->
 [json]:https://img.shields.io/badge/JSON-0000ff
 [yaml]:https://img.shields.io/badge/YAML-0000ff
 
+<!-- Library Badges -->
+[c#]:https://img.shields.io/badge/C%23-0000ff
+
+
+<!-- OpenAPI Specification Links -->
+[openapi_2.0_link]:https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md
+[openapi_3.0.0_link]:https://github.com/OAI/OpenAPI-Specification/tree/3.0.0
+[openapi_3.0.1_link]:https://github.com/OAI/OpenAPI-Specification/tree/3.0.1
+[openapi_3.0.2_link]:https://github.com/OAI/OpenAPI-Specification/tree/3.0.2
+[openapi_3.0.3_link]:https://github.com/OAI/OpenAPI-Specification/tree/3.0.3
+
+<!-- Library Links -->
+[skinbaron_lib]:
+[meinverein_lib]:
+
 <!-- API Links -->
-[skinbaron_link]:https://skinbaron.de/
-[skinbaron_file]:https://github.com/FriedrichRehren/api-collection/blob/main/skinbaron.json
-[meinverein_link]:https://www.buhl.de/meinverein/
-[meinverein_file]:https://github.com/FriedrichRehren/api-collection/blob/main/meinverein.json
+[skinbaron_link]:https://skinbaron.de/sbapi
+[skinbaron_file]:https://github.com/FriedrichRehren/api-collection/blob/main/api-docs/skinbaron.json
+[meinverein_file]:https://github.com/FriedrichRehren/api-collection/blob/main/api-docs/meinverein.json
